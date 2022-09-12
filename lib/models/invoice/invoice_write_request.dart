@@ -22,16 +22,16 @@ class InvoiceWriteRequest extends Equatable {
   final String invoiceNumber;
 
   @JsonKey(name: InvoicesFields.counterpartyName)
-  final int counterpartyName;
+  final String counterpartyName;
 
   @JsonKey(name: InvoicesFields.netAmount)
-  final int netAmount;
+  final double netAmount;
 
   @JsonKey(name: InvoicesFields.vat)
-  final int vat;
+  final double vat;
 
   @JsonKey(name: InvoicesFields.grossAmount)
-  final int grossAmount;
+  final double grossAmount;
 
   @override
   List<Object?> get props => <dynamic>[

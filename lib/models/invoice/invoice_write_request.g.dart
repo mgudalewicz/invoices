@@ -9,10 +9,10 @@ part of 'invoice_write_request.dart';
 InvoiceWriteRequest _$InvoiceWriteRequestFromJson(Map<String, dynamic> json) =>
     InvoiceWriteRequest(
       invoiceNumber: json['invoice_number'] as String,
-      counterpartyName: json['counterparty_name'] as int,
-      netAmount: json['net_amount'] as int,
-      vat: json['vat'] as int,
-      grossAmount: json['gross_amount'] as int,
+      counterpartyName: json['counterparty_name'] as String,
+      netAmount: (json['net_amount'] as num).toDouble(),
+      vat: (json['vat'] as num).toDouble(),
+      grossAmount: (json['gross_amount'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$InvoiceWriteRequestToJson(

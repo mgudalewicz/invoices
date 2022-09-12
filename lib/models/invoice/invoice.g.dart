@@ -9,10 +9,10 @@ part of 'invoice.dart';
 Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
       id: json['id'] as String,
       invoiceNumber: json['invoice_number'] as String,
-      counterpartyName: json['counterparty_name'] as int,
-      netAmount: json['net_amount'] as int,
-      vat: json['vat'] as int,
-      grossAmount: json['gross_amount'] as int,
+      counterpartyName: json['counterparty_name'] as String,
+      netAmount: (json['net_amount'] as num).toDouble(),
+      vat: (json['vat'] as num).toDouble(),
+      grossAmount: (json['gross_amount'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$InvoiceToJson(Invoice instance) => <String, dynamic>{
