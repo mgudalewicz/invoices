@@ -6,7 +6,7 @@ import 'package:invoices/service_locator.dart';
 class InvoicesDataProvider {
   final FirebaseFirestore _firebaseFirestore = sl();
 
-  Future<Map<String, Invoice>> fetchAll() async {
+  Future<Map<String, Invoice>> fetchAllInvoices() async {
     final QuerySnapshot<Map<String, dynamic>> result = await _firebaseFirestore.collection('invoices').get();
 
     final Map<String, Invoice> invoices = <String, Invoice>{};
@@ -19,7 +19,7 @@ class InvoicesDataProvider {
     return invoices;
   }
 
-  Stream<List<Invoice>> getItemsStream() {
+  Stream<List<Invoice>> getInvoicesStream() {
     return _firebaseFirestore.collection('invoices').snapshots().map(
       (querySnapshot) {
         return querySnapshot.docs.map(
