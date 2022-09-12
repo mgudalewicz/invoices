@@ -31,7 +31,17 @@ class AddInvoiceCubit extends Cubit<AddInvoiceState> {
     try {
       await _invoicesDataManager.create(invoiceWriteRequest);
     } catch (error) {
-      Fluttertoast.showToast(msg: 'Coś poszło nie tak: $error');
+      Fluttertoast.showToast(
+        msg: 'Coś poszło nie tak: $error',
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.red,
+      );
+      return;
     }
+    Fluttertoast.showToast(
+      msg: 'Faktura została zapisana',
+      gravity: ToastGravity.TOP,
+      backgroundColor: Colors.green,
+    );
   }
 }

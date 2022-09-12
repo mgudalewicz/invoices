@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:invoices/data_providers/invoices_data_provider.dart';
 import 'package:invoices/models/invoice/invoice.dart';
@@ -24,7 +25,11 @@ class InvoicesDataManager {
       );
       await fetch();
     } catch (e) {
-      Fluttertoast.showToast(msg: 'Coś poszło nie tak');
+      Fluttertoast.showToast(
+        msg: 'Coś poszło nie tak',
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.red,
+      );
     }
   }
 }

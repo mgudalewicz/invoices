@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({
@@ -8,6 +9,7 @@ class AppTextFormField extends StatelessWidget {
     this.hintText,
     this.onChanged,
     this.keyboardType = TextInputType.text,
+    this.inputFormatters,
   }) : super(key: key);
 
   final GlobalKey<FormFieldState<String>>? formFieldKey;
@@ -15,12 +17,14 @@ class AppTextFormField extends StatelessWidget {
   final String labelText;
   final String? hintText;
   final ValueChanged<String>? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(10.0),
       child: TextFormField(
+        inputFormatters: inputFormatters,
         maxLines: null,
         keyboardType: keyboardType,
         validator: (value) {

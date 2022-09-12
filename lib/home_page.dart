@@ -24,9 +24,9 @@ class _HomePageState extends State<HomePage> {
           ),
           body: Builder(builder: (context) {
             if (currentIndex == 0) {
-              return AddInvoicePage();
+              return const AddInvoicePage();
             }
-            return SizedBox();
+            return const SizedBox();
           }),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIndex,
