@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.post_add),
-                label: 'Dodaj fakturę',
+                label: 'Dodawanie faktury',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.folder),
