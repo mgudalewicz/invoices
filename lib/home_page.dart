@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invoices/add_invoice/add_invoice.dart';
+import 'package:invoices/invoices_view/invoice_view_home.dart/inoice_view_home_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
             if (currentIndex == 0) {
               return const AddInvoicePage();
             }
-            return const SizedBox();
+            return const InvoiceViewHomePageContent();
           }),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIndex,

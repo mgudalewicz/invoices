@@ -12,7 +12,7 @@ class InvoicesDataManager {
     _invoicesDataProvider.fetchAllInvoices();
   }
 
-  Stream<List<Invoice>> getPlayers() {
+  Stream<List<Invoice>> getAllInvoices() {
     return _invoicesDataProvider.getInvoicesStream();
   }
 
