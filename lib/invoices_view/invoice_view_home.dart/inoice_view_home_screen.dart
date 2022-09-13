@@ -93,7 +93,7 @@ Future<void> _dialogBuilder(BuildContext context, Invoice invoice) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        insetPadding: EdgeInsets.symmetric(vertical: 120),
+        insetPadding: const EdgeInsets.symmetric(vertical: 120),
         title: Text(invoice.invoiceNumber),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
