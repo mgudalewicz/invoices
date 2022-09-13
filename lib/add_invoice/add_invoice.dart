@@ -103,6 +103,7 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
 
   Widget _netAmountTextFormField() {
     return AppTextFormField(
+      validatorNumber: true,
       formFieldKey: _netAmountNameInputKey,
       labelText: 'Kwota netto (zł)',
       keyboardType: const TextInputType.numberWithOptions(decimal: true),

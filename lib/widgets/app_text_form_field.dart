@@ -10,6 +10,7 @@ class AppTextFormField extends StatelessWidget {
     this.onChanged,
     this.keyboardType = TextInputType.text,
     this.inputFormatters,
+    this.validatorNumber = false,
   }) : super(key: key);
 
   final GlobalKey<FormFieldState<String>>? formFieldKey;
@@ -18,6 +19,7 @@ class AppTextFormField extends StatelessWidget {
   final String? hintText;
   final ValueChanged<String>? onChanged;
   final List<TextInputFormatter>? inputFormatters;
+  final bool validatorNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,12 @@ class AppTextFormField extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Pole nie może być puste';
+          }
+          if (validatorNumber == true) {
+            double amount = double.parse(value);
+            if (amount < 0.01) {
+              return 'Kwota musi być większa od 0';
+            }
           }
           return null;
         },
