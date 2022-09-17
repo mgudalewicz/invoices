@@ -1,16 +1,7 @@
-# invoices
+Application for saving invoices. Cubit/Bloc, GetIt, Firebase, among others, were used.
 
-A new Flutter project.
+Below is a demonstration of the application's capabilities:
 
-## Getting Started
+https://user-images.githubusercontent.com/97981278/189981147-c1cfda23-c927-4bc7-a22b-dd63967172a6.mp4
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Currently one collection is shared with all users. However, this can be changed. The ability to create users would need to be added. 
