@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({
-    Key? key,
-    required this.formFieldKey,
+    super.key,
     required this.labelText,
+    this.formFieldKey,
     this.hintText,
     this.onChanged,
     this.keyboardType = TextInputType.text,
     this.inputFormatters,
     this.validatorNumber = false,
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormFieldState<String>>? formFieldKey;
   final TextInputType keyboardType;
