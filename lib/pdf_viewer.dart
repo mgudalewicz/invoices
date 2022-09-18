@@ -20,6 +20,7 @@ class PdfViewer extends StatefulWidget {
 class _PdfViewerState extends State<PdfViewer> {
   late PdfViewerController _pdfViewerController;
 
+  @override
   void initState() {
     _pdfViewerController = PdfViewerController();
     super.initState();

@@ -35,6 +35,46 @@ class InvoicesDataManager {
     }
   }
 
+  Future<void> deletePdf({
+    required String idInvoice,
+    required String ulrLink,
+  }
+  ) async {
+    try {
+      await _invoicesDataProvider.deletePdf(
+        idInvoice: idInvoice,
+        ulrLink: ulrLink,
+      );
+      await fetch();
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: 'Coś poszło nie tak',
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+    Future<void> addPdf({
+    required String idInvoice,
+    required String ulrLink,
+  }
+  ) async {
+    try {
+      await _invoicesDataProvider.addPdf(
+        idInvoice: idInvoice,
+        ulrLink: ulrLink,
+      );
+      await fetch();
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: 'Coś poszło nie tak',
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
   Future<String?> uploadFile({
     required File invoicePDF,
   }) async {

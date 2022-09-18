@@ -3,17 +3,25 @@ import 'package:invoices/add_invoice/add_invoice.dart';
 import 'package:invoices/invoices_view/invoice_view_home.dart/invoice_view_home_screen.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+    this.pageIndex,
+  });
+
+  final int? pageIndex;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  var currentIndex = 0;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    if (widget.pageIndex != null) {
+      currentIndex = widget.pageIndex!;
+    }
     return MaterialApp(
         title: 'Invoice',
         theme: ThemeData(
@@ -27,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             if (currentIndex == 0) {
               return const AddInvoicePage();
             }
-            return  const InvoiceViewHomeScreenScreen();
+            return const InvoiceViewHomeScreenScreen();
           }),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIndex,
