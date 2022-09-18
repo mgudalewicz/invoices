@@ -35,7 +35,6 @@ class InvoicesDataManager {
     }
   }
 
-<<<<<<< HEAD
   Future<void> deletePdf({
     required String idInvoice,
     required String ulrLink,
@@ -76,8 +75,6 @@ class InvoicesDataManager {
     }
   }
 
-=======
->>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
   Future<String?> uploadFile({
     required File invoicePDF,
   }) async {

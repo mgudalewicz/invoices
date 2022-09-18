@@ -11,7 +11,6 @@ import 'package:invoices/service_locator.dart';
 class InvoicesDataProvider {
   final FirebaseFirestore _firebaseFirestore = sl();
   final FirebaseStorage _firebaseStorage = sl();
-<<<<<<< HEAD
 
   Future<Map<String, Invoice>> fetchWithId(String invoiceId) async {
     final QuerySnapshot<Map<String, dynamic>> result =
@@ -25,8 +24,6 @@ class InvoicesDataProvider {
 
     return invoice;
   }
-=======
->>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
 
   Future<Map<String, Invoice>> fetchAllInvoices() async {
     final QuerySnapshot<Map<String, dynamic>> result = await _firebaseFirestore.collection('invoices').get();
@@ -59,7 +56,6 @@ class InvoicesDataProvider {
     return _firebaseFirestore.collection('invoices').add(invoiceWriteRequest.toJson());
   }
 
-<<<<<<< HEAD
   Future<void> deletePdf({
     required String idInvoice,
     required String ulrLink,
@@ -75,19 +71,13 @@ class InvoicesDataProvider {
     return _firebaseFirestore.collection('invoices').doc(idInvoice).update({'invoice_pdf': ulrLink});
   }
 
-=======
->>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
   Future<String> uploadFile({
     required File invoicePDF,
   }) async {
     const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
     var random = Random();
-<<<<<<< HEAD
     String pdfNamed =
         String.fromCharCodes(Iterable.generate(20, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
-=======
-    String pdfNamed = String.fromCharCodes(List.generate(20, (index) => random.nextInt(chars.length)));
->>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
     UploadTask? uploadTask;
     final path = 'files/$pdfNamed.pdf';
     final file = File(invoicePDF.path);

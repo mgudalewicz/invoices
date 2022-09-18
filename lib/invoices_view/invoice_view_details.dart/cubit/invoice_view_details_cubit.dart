@@ -56,11 +56,6 @@ class InvoiceViewDetailsCubit extends Cubit<InvoiceViewDetailsState> {
       );
       return false;
     }
-    Fluttertoast.showToast(
-      msg: 'Faktura została dodana',
-      gravity: ToastGravity.TOP,
-      backgroundColor: Colors.cyan.shade800,
-    );
     return true;
   }
 
@@ -82,9 +77,9 @@ class InvoiceViewDetailsCubit extends Cubit<InvoiceViewDetailsState> {
       return false;
     }
     Fluttertoast.showToast(
-      msg: 'Faktura została usunięta',
+      msg: 'Faktura została uusnięta',
       gravity: ToastGravity.TOP,
-      backgroundColor: Colors.cyan.shade800,
+      backgroundColor: Colors.blue,
     );
     return true;
   }

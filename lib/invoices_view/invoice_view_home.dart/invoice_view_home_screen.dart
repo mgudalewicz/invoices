@@ -11,10 +11,6 @@ class InvoiceViewHomeScreenScreen extends StatelessWidget {
     return BlocProvider(
         create: (context) => InvoiceViewHomeCubit()..init(),
         child: BlocBuilder<InvoiceViewHomeCubit, InvoiceViewHomeState>(builder: (context, state) {
-          if (state is InvoiceViewHomeErrorState) {
-            return Center(child: Text('Coś poszło nie tak: ${state.error}'));
-          }
-
           if (state is InvoiceViewHomeLoadingState) {
             return const Center(child: CircularProgressIndicator());
           }

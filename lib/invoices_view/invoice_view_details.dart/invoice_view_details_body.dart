@@ -7,9 +7,7 @@ import 'package:invoices/home_page.dart';
 import 'package:invoices/invoices_view/invoice_view_details.dart/cubit/invoice_view_details_cubit.dart';
 import 'package:invoices/invoices_view/invoice_view_details.dart/invoice_view_details_screen.dart';
 import 'package:invoices/models/invoice/invoice.dart';
-import 'package:invoices/widgets/app_bar_widget.dart';
-import 'package:invoices/widgets/app_button.dart';
-import 'package:invoices/widgets/pdf_viewer.dart';
+import 'package:invoices/pdf_viewer.dart';
 
 class InvoiceViewDetailsBody extends StatefulWidget {
   const InvoiceViewDetailsBody({
@@ -33,52 +31,49 @@ class _InvoiceViewDetailsBodyState extends State<InvoiceViewDetailsBody> {
       isLink = true;
     }
     return Scaffold(
-      appBar: AppBarWidget(
-        leading: _backToPreviousSide(),
-        title: 'Szczegóły faktury',
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: GoToInvoiceViewHome,
+          icon: const Icon(Icons.arrow_back),
+        ),
+        title: Text(widget.state.invoice.invoiceNumber),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
-          const Text('Numer fakury:'),
-          _incomingDetails(widget.state.invoice.invoiceNumber),
-          const Divider(color: Colors.cyan),
-          const SizedBox(height: 16),
           const Text('Kontrahent:'),
-          _incomingDetails(widget.state.invoice.counterpartyName),
-          const Divider(color: Colors.cyan),
+          Text(
+            widget.state.invoice.counterpartyName,
+            style: const TextStyle(fontSize: 22.0),
+          ),
           const SizedBox(height: 16),
           const Text('Kwota netto:'),
-          _incomingDetails('${widget.state.invoice.netAmount.toString()} zł'),
-          const Divider(color: Colors.cyan),
+          Text(
+            '${widget.state.invoice.netAmount.toString()} zł',
+            style: const TextStyle(fontSize: 22.0),
+          ),
           const SizedBox(height: 16),
           Text('Vat ${(widget.state.invoice.vat * 100).round()} %'),
-          _incomingDetails('${(widget.state.invoice.netAmount * widget.state.invoice.vat).toStringAsFixed(2)} zł'),
-          const Divider(color: Colors.cyan),
+          Text(
+            '${(widget.state.invoice.netAmount * widget.state.invoice.vat).toStringAsFixed(2)} zł',
+            style: const TextStyle(fontSize: 22.0),
+          ),
           const SizedBox(height: 16),
           const Text('Kwota brutto:'),
-          _incomingDetails(
-              '${(widget.state.invoice.netAmount * widget.state.invoice.vat + widget.state.invoice.netAmount).toStringAsFixed(2)} zł'),
-          const Divider(color: Colors.cyan),
+          Text(
+            '${(widget.state.invoice.netAmount * widget.state.invoice.vat + widget.state.invoice.netAmount).toStringAsFixed(2)} zł',
+            style: const TextStyle(fontSize: 22.0),
+          ),
           if (isLink == false)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AppButton(
-                  onPressed: selectAndSavePdf,
-                  text: 'Dodaj załącznik (.pdf)',
-                ),
-              ],
+            ElevatedButton(
+              onPressed: selectAndSavePdf,
+              child: const Text('Dodaj fakturę (.pdf)'),
             ),
-          const SizedBox(height: 20),
           if (isLink != false)
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(width: 30),
-                AppButton(
+                ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -88,41 +83,23 @@ class _InvoiceViewDetailsBodyState extends State<InvoiceViewDetailsBody> {
                       ),
                     );
                   },
-                  text: 'Otwórz załącznik',
+                  child: const Text('Otwórz fakturę'),
                 ),
-                IconButton(
-                  iconSize: 25,
-                  onPressed: (() => deletePDF(invoice: widget.state.invoice)),
-                  icon: const Icon(
-                    Icons.delete_forever,
-                    color: Colors.red,
-                    size: 35,
+                SizedBox(
+                  width: 40,
+                  child: IconButton(
+                    onPressed: (() => deletePDF(invoice: widget.state.invoice)),
+                    icon: const Icon(
+                      Icons.delete_forever,
+                      color: Colors.red,
+                      size: 35,
+                    ),
                   ),
                 ),
               ],
             ),
-          const SizedBox(height: 20),
         ],
       ),
-    );
-  }
-
-  Widget _incomingDetails(String text) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          text,
-          style: const TextStyle(fontSize: 28.0),
-        ),
-      ],
-    );
-  }
-
-  IconButton _backToPreviousSide() {
-    return IconButton(
-      onPressed: goToInvoiceViewHome,
-      icon: const Icon(Icons.arrow_back),
     );
   }
 
@@ -170,7 +147,7 @@ class _InvoiceViewDetailsBodyState extends State<InvoiceViewDetailsBody> {
     return refreshPage();
   }
 
-  Future<void> goToInvoiceViewHome() {
+  Future<void> GoToInvoiceViewHome() {
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const HomePage(pageIndex: 1),
