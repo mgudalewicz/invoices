@@ -12,6 +12,7 @@ class InvoiceWriteRequest extends Equatable {
     required this.netAmount,
     required this.vat,
     required this.grossAmount,
+    this.invoicePDF,
   });
 
   factory InvoiceWriteRequest.fromJson(Map<String, dynamic> json) => _$InvoiceWriteRequestFromJson(json);
@@ -33,6 +34,9 @@ class InvoiceWriteRequest extends Equatable {
   @JsonKey(name: InvoicesFields.grossAmount)
   final double grossAmount;
 
+  @JsonKey(name: InvoicesFields.invoicePDF)
+  final String? invoicePDF;
+
   @override
   List<Object?> get props => <dynamic>[
         invoiceNumber,
@@ -40,5 +44,6 @@ class InvoiceWriteRequest extends Equatable {
         netAmount,
         vat,
         grossAmount,
+        invoicePDF,
       ];
 }

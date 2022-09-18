@@ -13,6 +13,7 @@ InvoiceWriteRequest _$InvoiceWriteRequestFromJson(Map<String, dynamic> json) =>
       netAmount: (json['net_amount'] as num).toDouble(),
       vat: (json['vat'] as num).toDouble(),
       grossAmount: (json['gross_amount'] as num).toDouble(),
+      invoicePDF: json['invoice_pdf'] as String?,
     );
 
 Map<String, dynamic> _$InvoiceWriteRequestToJson(
@@ -23,4 +24,5 @@ Map<String, dynamic> _$InvoiceWriteRequestToJson(
       'net_amount': instance.netAmount,
       'vat': instance.vat,
       'gross_amount': instance.grossAmount,
+      'invoice_pdf': instance.invoicePDF,
     };

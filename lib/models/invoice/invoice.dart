@@ -13,6 +13,7 @@ class Invoice extends Equatable {
     required this.netAmount,
     required this.vat,
     required this.grossAmount,
+    this.invoicePDF,
   });
 
   factory Invoice.fromJson(Map<String, dynamic> json) => _$InvoiceFromJson(json);
@@ -37,6 +38,9 @@ class Invoice extends Equatable {
   @JsonKey(name: InvoicesFields.grossAmount)
   final double grossAmount;
 
+  @JsonKey(name: InvoicesFields.invoicePDF)
+  final String? invoicePDF;
+
   @override
   List<Object?> get props => <dynamic>[
         id,
@@ -45,5 +49,6 @@ class Invoice extends Equatable {
         netAmount,
         vat,
         grossAmount,
+        invoicePDF,
       ];
 }

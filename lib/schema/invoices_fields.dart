@@ -16,4 +16,7 @@ class InvoicesFields {
 
   /// Type [double]
   static const String grossAmount = 'gross_amount';
+
+  /// Type [String]
+  static const String invoicePDF = 'invoice_pdf';
 }

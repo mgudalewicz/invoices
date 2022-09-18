@@ -13,6 +13,7 @@ Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
       netAmount: (json['net_amount'] as num).toDouble(),
       vat: (json['vat'] as num).toDouble(),
       grossAmount: (json['gross_amount'] as num).toDouble(),
+      invoicePDF: json['invoice_pdf'] as String?,
     );
 
 Map<String, dynamic> _$InvoiceToJson(Invoice instance) => <String, dynamic>{
@@ -22,4 +23,5 @@ Map<String, dynamic> _$InvoiceToJson(Invoice instance) => <String, dynamic>{
       'net_amount': instance.netAmount,
       'vat': instance.vat,
       'gross_amount': instance.grossAmount,
+      'invoice_pdf': instance.invoicePDF,
     };

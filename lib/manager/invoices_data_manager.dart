@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:invoices/data_providers/invoices_data_provider.dart';
@@ -31,5 +33,24 @@ class InvoicesDataManager {
         backgroundColor: Colors.red,
       );
     }
+  }
+
+  Future<String?> uploadFile({
+    required File invoicePDF,
+  }) async {
+    String? link;
+    try {
+      link = await _invoicesDataProvider.uploadFile(
+        invoicePDF: invoicePDF,
+      );
+      await fetch();
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: 'Coś poszło nie tak',
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.red,
+      );
+    }
+    return link;
   }
 }

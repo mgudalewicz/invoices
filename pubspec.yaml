@@ -45,6 +45,9 @@ dependencies:
   build_runner: ^2.2.0
   get_it: ^7.2.0
   fluttertoast: ^8.0.9
+  file_picker: ^5.1.0
+  firebase_storage: ^10.3.8
+  syncfusion_flutter_pdfviewer: ^20.2.49-beta
 
 dev_dependencies:
   flutter_test:

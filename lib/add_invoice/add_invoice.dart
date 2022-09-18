@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoices/add_invoice/cubit/add_invoice_cubit.dart';
 import 'package:invoices/home_page.dart';
+import 'package:invoices/pdf_viewer.dart';
 import 'package:invoices/widgets/app_text_form_field.dart';
 
 class AddInvoicePage extends StatefulWidget {
@@ -19,6 +23,8 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
   final GlobalKey<FormFieldState<String>> _invoiceNumberInputKey = GlobalKey<FormFieldState<String>>();
   final GlobalKey<FormFieldState<String>> _counterpartyNameInputKey = GlobalKey<FormFieldState<String>>();
   final GlobalKey<FormFieldState<String>> _netAmountNameInputKey = GlobalKey<FormFieldState<String>>();
+
+  PlatformFile? pickedPdf;
 
   int _vatValue = 0;
   double _grossAmount = 0;
@@ -63,6 +69,42 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                             style: const TextStyle(
                               fontSize: 20.0,
                             )),
+                        if (pickedPdf == null)
+                          ElevatedButton(
+                            onPressed: selectPdf,
+                            child: const Text('Dodaj fakturę (.pdf)'),
+                          ),
+                        if (pickedPdf != null)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(width: 20),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PdfViewer(
+                                        pdfFromFile: File(pickedPdf!.path!),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Otwórz fakturę'),
+                              ),
+                              SizedBox(
+                                width: 20,
+                                child: IconButton(
+                                  onPressed: (() => setState(() {
+                                        pickedPdf = null;
+                                      })),
+                                  icon: const Icon(
+                                    Icons.delete_forever,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                       ],
                     ),
                   ],
@@ -73,12 +115,28 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
         }));
   }
 
+  Future selectPdf() async {
+    final result = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    if (result == null) return;
+    setState(() {
+      pickedPdf = result.files.first;
+    });
+  }
+
   Column _floatingButton(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 20),
         FloatingActionButton(
           onPressed: () {
+            File? file;
+            if (pickedPdf != null) {
+              file = File(pickedPdf!.path!);
+            }
             if (_formKey.currentState!.validate()) {
               context.read<AddInvoiceCubit>().create(
                     invoiceNumber: _invoiceNumberInputKey.currentState!.value!,
@@ -86,6 +144,7 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                     netAmount: _netAmount,
                     vat: _vatValue / 100,
                     grossAmount: _grossAmount,
+                    pickedPdf: file,
                   );
               Navigator.of(context).push(
                 MaterialPageRoute(
