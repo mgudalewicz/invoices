@@ -380,6 +380,23 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+<<<<<<< HEAD
+=======
+  image:
+    dependency: transitive
+    description:
+      name: image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
+>>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
   io:
     dependency: transitive
     description:
