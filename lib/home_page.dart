@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
         title: 'Invoice',
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
+          scaffoldBackgroundColor: const Color.fromARGB(255, 238, 238, 238),
         ),
         home: Scaffold(
           appBar: AppBarWidget(title: currentIndex == 0 ? 'Dodawanie faktury' : 'Twoje faktury'),

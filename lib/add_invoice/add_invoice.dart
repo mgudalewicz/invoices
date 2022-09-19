@@ -75,7 +75,7 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                           if (pickedPdf == null)
                             AppButton(
                               onPressed: selectPdf,
-                              text: 'Dodaj fakturę (.pdf)',
+                              text: 'Dodaj załącznik (.pdf)',
                             ),
                           if (pickedPdf != null)
                             Row(
@@ -92,7 +92,7 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                                       ),
                                     );
                                   },
-                                  text: 'Otwórz fakturę',
+                                  text: 'Otwórz załącznik',
                                 ),
                                 SizedBox(
                                   width: 20,

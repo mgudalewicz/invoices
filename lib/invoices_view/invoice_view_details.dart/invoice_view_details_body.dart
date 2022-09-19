@@ -68,7 +68,7 @@ class _InvoiceViewDetailsBodyState extends State<InvoiceViewDetailsBody> {
               children: [
                 AppButton(
                   onPressed: selectAndSavePdf,
-                  text: 'Dodaj fakturę (.pdf)',
+                  text: 'Dodaj załącznik (.pdf)',
                 ),
               ],
             ),
@@ -88,7 +88,7 @@ class _InvoiceViewDetailsBodyState extends State<InvoiceViewDetailsBody> {
                       ),
                     );
                   },
-                  text: 'Otwórz fakturę',
+                  text: 'Otwórz załącznik',
                 ),
                 SizedBox(
                   width: 40,
