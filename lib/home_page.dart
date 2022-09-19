@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:invoices/add_invoice/add_invoice.dart';
 import 'package:invoices/invoices_view/invoice_view_home.dart/invoice_view_home_screen.dart';
 import 'package:invoices/widgets/app_bar_widget.dart';
+import 'package:invoices/widgets/app_bar_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -28,11 +29,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Invoice',
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
-          scaffoldBackgroundColor: const Color.fromARGB(255, 238, 238, 238),
         ),
         home: Scaffold(
           appBar: AppBarWidget(title: currentIndex == 0 ? 'Dodawanie faktury' : 'Twoje faktury'),

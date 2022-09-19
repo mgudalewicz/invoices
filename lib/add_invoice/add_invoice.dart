@@ -6,12 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoices/add_invoice/cubit/add_invoice_cubit.dart';
 import 'package:invoices/home_page.dart';
-<<<<<<< HEAD
 import 'package:invoices/widgets/app_button.dart';
 import 'package:invoices/widgets/pdf_viewer.dart';
-=======
-import 'package:invoices/pdf_viewer.dart';
->>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
 import 'package:invoices/widgets/app_text_form_field.dart';
 
 class AddInvoicePage extends StatefulWidget {
@@ -41,7 +37,6 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
     return BlocProvider(
         create: (context) => AddInvoiceCubit(),
         child: BlocBuilder<AddInvoiceCubit, AddInvoiceState>(builder: (context, state) {
-<<<<<<< HEAD
           return SafeArea(
             child: Scaffold(
               floatingActionButton: _floatingButton(context),
@@ -74,13 +69,13 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                           const SizedBox(height: 10),
                           Text('Kwota brutto: ${_grossAmount.toStringAsFixed(2)} zł',
                               style: const TextStyle(
-                                fontSize: 30.0,
+                                fontSize: 20.0,
                               )),
                           const SizedBox(height: 20),
                           if (pickedPdf == null)
                             AppButton(
                               onPressed: selectPdf,
-                              text: 'Dodaj załącznik (.pdf)',
+                              text: 'Dodaj fakturę (.pdf)',
                             ),
                           if (pickedPdf != null)
                             Row(
@@ -97,93 +92,26 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                                       ),
                                     );
                                   },
-                                  text: 'Otwórz załącznik',
+                                  text: 'Otwórz fakturę',
                                 ),
-                                IconButton(
-                                  iconSize: 25,
-=======
-          return Scaffold(
-            floatingActionButton: _floatingButton(context),
-            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-            body: Center(
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const SizedBox(height: 40),
-                        const Text('Faktura',
-                            style: TextStyle(
-                              fontSize: 40.0,
-                            )),
-                        AppTextFormField(
-                          formFieldKey: _invoiceNumberInputKey,
-                          labelText: 'Numer faktury',
-                          hintText: 'Podaj numer faktury',
-                        ),
-                        AppTextFormField(
-                          formFieldKey: _counterpartyNameInputKey,
-                          labelText: 'Nazwa kontrahenta',
-                          hintText: 'Podaj nazwę kontrahenta',
-                        ),
-                        _netAmountTextFormField(),
-                        _choiceVatRate(),
-                        const SizedBox(height: 10),
-                        Text('Kwota brutto: ${_grossAmount.toStringAsFixed(2)} zł',
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                            )),
-                        if (pickedPdf == null)
-                          ElevatedButton(
-                            onPressed: selectPdf,
-                            child: const Text('Dodaj fakturę (.pdf)'),
-                          ),
-                        if (pickedPdf != null)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(width: 20),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => PdfViewer(
-                                        pdfFromFile: File(pickedPdf!.path!),
-                                      ),
+                                SizedBox(
+                                  width: 20,
+                                  child: IconButton(
+                                    onPressed: (() => setState(() {
+                                          pickedPdf = null;
+                                        })),
+                                    icon: const Icon(
+                                      Icons.delete_forever,
+                                      color: Colors.red,
                                     ),
-                                  );
-                                },
-                                child: const Text('Otwórz fakturę'),
-                              ),
-                              SizedBox(
-                                width: 20,
-                                child: IconButton(
->>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
-                                  onPressed: (() => setState(() {
-                                        pickedPdf = null;
-                                      })),
-                                  icon: const Icon(
-                                    Icons.delete_forever,
-                                    color: Colors.red,
                                   ),
                                 ),
-<<<<<<< HEAD
                               ],
                             ),
                         ],
                       ),
                     ],
                   ),
-=======
-                              ),
-                            ],
-                          ),
-                      ],
-                    ),
-                  ],
->>>>>>> 256f233 (add download and display pdf to 'add_invoice' page)
                 ),
               ),
             ),
