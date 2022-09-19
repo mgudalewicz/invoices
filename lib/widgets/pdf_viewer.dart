@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:invoices/widgets/app_bar_widget.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfViewer extends StatefulWidget {
@@ -30,24 +31,30 @@ class _PdfViewerState extends State<PdfViewer> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: widget.pdfFromFile == null ? _pdfForLink() : _pdfForFile(),
-        appBar: AppBar(actions: [
-          IconButton(
-              onPressed: (() {
-                _pdfViewerController.zoomLevel *= 1.25;
-              }),
-              icon: const Icon(Icons.zoom_in)),
-          IconButton(
-              onPressed: (() {
-                _pdfViewerController.zoomLevel *= 0.75;
-              }),
-              icon: const Icon(Icons.zoom_out))
-        ]),
-      ),
+          body: widget.pdfFromFile == null ? _pdfForLink() : _pdfForFile(),
+          appBar: AppBarWidget(
+            title: null,
+            actions: _action(),
+          )),
     );
   }
 
-  SfPdfViewer _pdfForFile() {
+  List<Widget> _action() {
+    return <Widget>[
+      IconButton(
+          onPressed: (() {
+            _pdfViewerController.zoomLevel *= 1.25;
+          }),
+          icon: const Icon(Icons.zoom_in)),
+      IconButton(
+          onPressed: (() {
+            _pdfViewerController.zoomLevel *= 0.75;
+          }),
+          icon: const Icon(Icons.zoom_out))
+    ];
+  }
+
+  Widget _pdfForFile() {
     return SfPdfViewer.file(
       widget.pdfFromFile!,
       controller: _pdfViewerController,

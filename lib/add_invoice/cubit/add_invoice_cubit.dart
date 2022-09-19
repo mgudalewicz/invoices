@@ -48,7 +48,7 @@ class AddInvoiceCubit extends Cubit<AddInvoiceState> {
     Fluttertoast.showToast(
       msg: 'Faktura została zapisana',
       gravity: ToastGravity.TOP,
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.cyan.shade800,
     );
   }
 

@@ -6,7 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invoices/add_invoice/cubit/add_invoice_cubit.dart';
 import 'package:invoices/home_page.dart';
-import 'package:invoices/pdf_viewer.dart';
+import 'package:invoices/widgets/app_button.dart';
+import 'package:invoices/widgets/pdf_viewer.dart';
 import 'package:invoices/widgets/app_text_form_field.dart';
 
 class AddInvoicePage extends StatefulWidget {
@@ -36,78 +37,81 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
     return BlocProvider(
         create: (context) => AddInvoiceCubit(),
         child: BlocBuilder<AddInvoiceCubit, AddInvoiceState>(builder: (context, state) {
-          return Scaffold(
-            floatingActionButton: _floatingButton(context),
-            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-            body: Center(
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const SizedBox(height: 40),
-                        const Text('Faktura',
-                            style: TextStyle(
-                              fontSize: 40.0,
-                            )),
-                        AppTextFormField(
-                          formFieldKey: _invoiceNumberInputKey,
-                          labelText: 'Numer faktury',
-                          hintText: 'Podaj numer faktury',
-                        ),
-                        AppTextFormField(
-                          formFieldKey: _counterpartyNameInputKey,
-                          labelText: 'Nazwa kontrahenta',
-                          hintText: 'Podaj nazwę kontrahenta',
-                        ),
-                        _netAmountTextFormField(),
-                        _choiceVatRate(),
-                        const SizedBox(height: 10),
-                        Text('Kwota brutto: ${_grossAmount.toStringAsFixed(2)} zł',
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                            )),
-                        if (pickedPdf == null)
-                          ElevatedButton(
-                            onPressed: selectPdf,
-                            child: const Text('Dodaj fakturę (.pdf)'),
+          return SafeArea(
+            child: Scaffold(
+              floatingActionButton: _floatingButton(context),
+              floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+              body: Center(
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const SizedBox(height: 40),
+                          const Text('Faktura',
+                              style: TextStyle(
+                                fontSize: 40.0,
+                              )),
+                          AppTextFormField(
+                            formFieldKey: _invoiceNumberInputKey,
+                            labelText: 'Numer faktury',
+                            hintText: 'Podaj numer faktury',
                           ),
-                        if (pickedPdf != null)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(width: 20),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => PdfViewer(
-                                        pdfFromFile: File(pickedPdf!.path!),
+                          AppTextFormField(
+                            formFieldKey: _counterpartyNameInputKey,
+                            labelText: 'Nazwa kontrahenta',
+                            hintText: 'Podaj nazwę kontrahenta',
+                          ),
+                          _netAmountTextFormField(),
+                          _choiceVatRate(),
+                          const SizedBox(height: 10),
+                          Text('Kwota brutto: ${_grossAmount.toStringAsFixed(2)} zł',
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                              )),
+                          const SizedBox(height: 20),
+                          if (pickedPdf == null)
+                            AppButton(
+                              onPressed: selectPdf,
+                              text: 'Dodaj fakturę (.pdf)',
+                            ),
+                          if (pickedPdf != null)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const SizedBox(width: 20),
+                                AppButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => PdfViewer(
+                                          pdfFromFile: File(pickedPdf!.path!),
+                                        ),
                                       ),
+                                    );
+                                  },
+                                  text: 'Otwórz fakturę',
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                  child: IconButton(
+                                    onPressed: (() => setState(() {
+                                          pickedPdf = null;
+                                        })),
+                                    icon: const Icon(
+                                      Icons.delete_forever,
+                                      color: Colors.red,
                                     ),
-                                  );
-                                },
-                                child: const Text('Otwórz fakturę'),
-                              ),
-                              SizedBox(
-                                width: 20,
-                                child: IconButton(
-                                  onPressed: (() => setState(() {
-                                        pickedPdf = null;
-                                      })),
-                                  icon: const Icon(
-                                    Icons.delete_forever,
-                                    color: Colors.red,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                      ],
-                    ),
-                  ],
+                              ],
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -132,6 +136,7 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
       children: [
         const SizedBox(height: 20),
         FloatingActionButton(
+          backgroundColor: Colors.cyan.shade800,
           onPressed: () {
             File? file;
             if (pickedPdf != null) {
@@ -184,7 +189,7 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
     return Container(
       margin: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: Colors.blueGrey),
         borderRadius: const BorderRadius.all(Radius.circular(5.0)),
       ),
       child: Row(
@@ -194,6 +199,9 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
             children: [
               const Text('Vat: 0%'),
               Radio(
+                  fillColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.cyan.shade600,
+                  ),
                   value: 0,
                   groupValue: _vatValue,
                   onChanged: (newValue) {
@@ -207,6 +215,9 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
             children: [
               const Text('Vat: 7%'),
               Radio(
+                  fillColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.cyan.shade600,
+                  ),
                   value: 7,
                   groupValue: _vatValue,
                   onChanged: (newValue) {
@@ -220,6 +231,9 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
             children: [
               const Text('Vat: 23%'),
               Radio(
+                  fillColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.cyan.shade600,
+                  ),
                   value: 23,
                   groupValue: _vatValue,
                   onChanged: (newValue) {

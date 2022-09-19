@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:ui' as ui;
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({
@@ -42,8 +43,23 @@ class AppTextFormField extends StatelessWidget {
           return null;
         },
         decoration: InputDecoration(
-          border: const OutlineInputBorder(),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.cyan),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueGrey),
+          ),
           labelText: labelText,
+          labelStyle: TextStyle(
+              foreground: Paint()
+                ..shader = ui.Gradient.linear(
+                  const Offset(0, 5),
+                  const Offset(25, 5),
+                  <Color>[
+                    Colors.cyan.shade800,
+                    Colors.cyan.shade900,
+                  ],
+                )),
           hintText: hintText,
         ),
         key: formFieldKey,

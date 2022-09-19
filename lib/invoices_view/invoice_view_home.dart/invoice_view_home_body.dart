@@ -55,8 +55,8 @@ class _InvoiceViewHomeBodyState extends State<InvoiceViewHomeBody> {
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 205, 223, 232),
-                      border: Border.all(color: Colors.blue),
+                      color: Colors.cyan.shade50,
+                      border: Border.all(color: Colors.cyan.shade500),
                       borderRadius: const BorderRadius.all(Radius.circular(5.0)),
                     ),
                     child: Row(
@@ -93,6 +93,7 @@ class _InvoiceViewHomeBodyState extends State<InvoiceViewHomeBody> {
                           ]),
                         ),
                         if (invoice.invoicePDF != null && invoice.invoicePDF != '') const Icon(Icons.article),
+                        const SizedBox(width: 10)
                       ],
                     ),
                   )),
