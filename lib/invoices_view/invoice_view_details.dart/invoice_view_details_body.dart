@@ -90,15 +90,13 @@ class _InvoiceViewDetailsBodyState extends State<InvoiceViewDetailsBody> {
                   },
                   text: 'Otwórz załącznik',
                 ),
-                SizedBox(
-                  width: 40,
-                  child: IconButton(
-                    onPressed: (() => deletePDF(invoice: widget.state.invoice)),
-                    icon: const Icon(
-                      Icons.delete_forever,
-                      color: Colors.red,
-                      size: 35,
-                    ),
+                IconButton(
+                  iconSize: 25,
+                  onPressed: (() => deletePDF(invoice: widget.state.invoice)),
+                  icon: const Icon(
+                    Icons.delete_forever,
+                    color: Colors.red,
+                    size: 35,
                   ),
                 ),
               ],
