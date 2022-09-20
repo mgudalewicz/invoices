@@ -69,7 +69,7 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                           const SizedBox(height: 10),
                           Text('Kwota brutto: ${_grossAmount.toStringAsFixed(2)} zł',
                               style: const TextStyle(
-                                fontSize: 20.0,
+                                fontSize: 30.0,
                               )),
                           const SizedBox(height: 20),
                           if (pickedPdf == null)
@@ -94,16 +94,14 @@ class _AddInvoicePageState extends State<AddInvoicePage> {
                                   },
                                   text: 'Otwórz załącznik',
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                  child: IconButton(
-                                    onPressed: (() => setState(() {
-                                          pickedPdf = null;
-                                        })),
-                                    icon: const Icon(
-                                      Icons.delete_forever,
-                                      color: Colors.red,
-                                    ),
+                                IconButton(
+                                  iconSize: 25,
+                                  onPressed: (() => setState(() {
+                                        pickedPdf = null;
+                                      })),
+                                  icon: const Icon(
+                                    Icons.delete_forever,
+                                    color: Colors.red,
                                   ),
                                 ),
                               ],
