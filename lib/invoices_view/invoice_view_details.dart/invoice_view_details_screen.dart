@@ -4,7 +4,7 @@ import 'package:invoices/invoices_view/invoice_view_details.dart/cubit/invoice_v
 import 'package:invoices/invoices_view/invoice_view_details.dart/invoice_view_details_body.dart';
 
 class InvoiceViewDetailsScreen extends StatelessWidget {
-  InvoiceViewDetailsScreen({
+  const InvoiceViewDetailsScreen({
     Key? key,
     required this.id,
   }) : super(key: key);
